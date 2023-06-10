@@ -1,5 +1,22 @@
+import file_manager as fm
+import parking_spot_manager as psm
+
 def start_process(path):
+    """
+    path로부터 파일 내용을 받아와서 각 원소가 딕셔너리인 리스트로 변환 후,
+    사용자의 input에 맞게 print, filter, sort, exit하는 함수
+    Args:
+        path (string): 파일 경로
+    Examples:
+        input==1: parking_spot 객체의 출력 형식에 맞게 모든 spot을 출력
+        input==2: 사용자가 입력한 value와 일치하는 spot을 찾아서 출력
+        input==3: 사용자가 입력한 keyword를 기준으로 spot을 정렬하여 출력
+        input==4: "Exit"를 출력하고, 반복을 종료
+    """
     while True:
+        # 모든 case에서 사용 가능한 spots
+        str_list = fm.read_file(path)
+        spots = psm.str_list_to_class_list(str_list)
         print("---menu---")
         print("[1] print")
         print("[2] filter")
@@ -7,8 +24,7 @@ def start_process(path):
         print("[4] exit")
         select = int(input('type:'))
         if select == 1:
-            print("not implemented yet")
-            # fill this block
+            psm.print_spots(spots)
         elif select == 2:
             print("---filter by---")
             print("[1] name")
@@ -52,7 +68,7 @@ def start_process(path):
                 # fill this block
             else: print("invalid input")
         elif select == 4:
-            print("not implemented yet")
-            # fill this block
+            print("Exit")
+            break
         else:
             print("invalid input")
