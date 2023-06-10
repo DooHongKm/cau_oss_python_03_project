@@ -13,10 +13,10 @@ def start_process(path):
         input==3: 사용자가 입력한 keyword를 기준으로 spot을 정렬하여 출력
         input==4: "Exit"를 출력하고, 반복을 종료
     """
-    while True:
-        # 모든 case에서 사용 가능한 spots
-        str_list = fm.read_file(path)
-        spots = psm.str_list_to_class_list(str_list)
+    # 모든 case에서 사용 가능한 spots, update 가능
+    str_list = fm.read_file(path)
+    spots = psm.str_list_to_class_list(str_list)
+    while True:        
         print("---menu---")
         print("[1] print")
         print("[2] filter")
@@ -35,27 +35,23 @@ def start_process(path):
             select = int(input('type:'))
             if select == 1:
                 keyword = input('type name:')
-                print("not implemented yet")
-                # fill this block
+                spots = psm.filter_by_name(spots, keyword)
             elif select == 2:
                 keyword = input('type city:')
-                print("not implemented yet")
-                # fill this block
+                spots = psm.filter_by_city(spots, keyword)
             elif select == 3:
                 keyword = input('type district:')
-                print("not implemented yet")
-                # fill this block
+                spots = psm.filter_by_district(spots, keyword)
             elif select == 4:
                 keyword = input('type ptype:')
-                print("not implemented yet")
-                # fill this block
+                spots = psm.filter_by_ptype(spots, keyword)
             elif select == 5:
                 min_lat = float(input('type min lat:'))
                 max_lat = float(input('type max lat:'))
-                min_lon = float(input('type min long:'))
-                max_lon = float(input('type max long:'))
-                print("not implemented yet")
-                # fill this block
+                min_long = float(input('type min long:'))
+                max_long = float(input('type max long:'))
+                keyword = (min_lat, max_lat, min_long, max_long)
+                spots = psm.filter_by_location(spots, keyword)
             else:
                 print("invalid input")
         elif select == 3:

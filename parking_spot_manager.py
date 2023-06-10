@@ -73,6 +73,19 @@ def print_spots(spots):
     for spot in spots:
         print(spot)
 
+# value를 입력받아 해당 keyword의 value가 일치하는 모든 spot의 리스트를 반환
+def filter_by_name(spots, name):
+    return [spot for spot in spots if name in spot.get('name')]
+def filter_by_city(spots, city):
+    return [spot for spot in spots if city in spot.get('city')]
+def filter_by_district(spots, district):
+    return [spot for spot in spots if district in spot.get('district')]
+def filter_by_ptype(spots, ptype):
+    return [spot for spot in spots if ptype in spot.get('ptype')]
+def filter_by_location(spots, locations):
+    min_lat, max_lat, min_long, max_long = locations
+    return [spot for spot in spots if min_lat < spot.get('latitude') < max_lat and min_long < spot.get('longitude') < max_long]    
+
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
 if __name__ == '__main__':
     
@@ -85,8 +98,8 @@ if __name__ == '__main__':
     print_spots(spots)
     
     # version#3
-    # spots = filter_by_district(spots, '동작')
-    # print_spots(spots)
+    spots = filter_by_district(spots, '동작')
+    print_spots(spots)
     
     # version#4
     # spots = sort_by_keyword(spots, 'name')
