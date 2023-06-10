@@ -25,7 +25,7 @@ class parking_spot:
         """
         parking_spot 객체의 반환 형식을 지정하고 해당 형식으로 반환하는 메서드
         Returns:
-            str: [name(ptype)] city district(lat:latitude, long:longitude)
+            str: 객체의 반환 형식
         """    
         item = self.__item
         s  = f"[{item['name']}({item['ptype']})] "
@@ -73,7 +73,7 @@ def print_spots(spots):
     for spot in spots:
         print(spot)
 
-# value를 입력받아 해당 keyword의 value가 일치하는 모든 spot의 리스트를 반환
+# value를 입력받아 해당 keyword의 value가 일치하는 모든 spot의 리스트를 반환하는 함수
 def filter_by_name(spots, name):
     return [spot for spot in spots if name in spot.get('name')]
 def filter_by_city(spots, city):
@@ -85,6 +85,17 @@ def filter_by_ptype(spots, ptype):
 def filter_by_location(spots, locations):
     min_lat, max_lat, min_long, max_long = locations
     return [spot for spot in spots if min_lat < spot.get('latitude') < max_lat and min_long < spot.get('longitude') < max_long]    
+
+def sort_by_keyword(spots, keyword):
+    """
+    매개변수로 받은 keyword를 기준으로 spot을 정렬하는 함수
+    Args:
+        spots   (list): 각 원소가 딕셔너리인 리스트
+        keyword (str) : name, city 등의 keyword
+    Returns:
+        list: 각 원소가 딕셔너리인 리스트로 정렬된 spot 정보를 반환
+    """
+    return sorted(spots, key = lambda spot: spot.get(keyword))
 
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
 if __name__ == '__main__':
@@ -102,5 +113,5 @@ if __name__ == '__main__':
     print_spots(spots)
     
     # version#4
-    # spots = sort_by_keyword(spots, 'name')
-    # print_spots(spots)
+    spots = sort_by_keyword(spots, 'name')
+    print_spots(spots)

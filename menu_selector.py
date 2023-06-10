@@ -60,8 +60,7 @@ def start_process(path):
             print(keywords)
             keyword = input('type keyword:')
             if keyword in keywords:
-                print("not implemented yet")
-                # fill this block
+                spots = psm.sort_by_keyword(spots, keyword)
             else: print("invalid input")
         elif select == 4:
             print("Exit")

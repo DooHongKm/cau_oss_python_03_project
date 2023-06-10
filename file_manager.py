@@ -49,18 +49,19 @@ def read_file(path):
     with open(path, 'rb') as f:
         tmp = f.readline()
         enc = chardet.detect(tmp)['encoding']
-
+        
     # file 객체 생성
     list_str = list()
     with open(file=path, mode='r', encoding=enc) as f:
         for line in f:
             list_str.append(line.strip())   # 공백(\n) 제거하여 리스트에 추가
     del list_str[0]
-
+    
     return list_str
 
 
 if __name__ == '__main__':
+    
     # 경로의 파일/폴더 목록 출력
     print_listdir('./')
     
